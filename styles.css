@@ -1,0 +1,191 @@
+/* Define your custom font */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('font.otf') format('opentype');
+}
+
+/* Apply the custom font globally */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'CustomFont', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #000000; /* Entire background is black */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 15%;
+    background-color: #000000;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    margin-bottom: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+}
+
+.navigation ul li {
+    margin: 30px 0;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for navigation links */
+.navigation ul li a:hover {
+    background-color: #FF4D4D;
+    color: white;
+    transform: scale(1.1); /* Slight scale on hover */
+}
+
+/* Main content styling */
+.content {
+    width: 85%;
+    padding: 20px;
+    background-color: #000000; /* Also black for main content */
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    color: white;
+    font-size: 48px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+    color: #ccc;
+    font-size: 24px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeIn 2s ease-in-out;
+}
+
+button:hover {
+    background-color: #FF4D4D;
+    transform: scale(1.1);
+}
+
+/* Games grid layout - centered */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 30px; /* Spacing between game items */
+    margin-top: 20px;
+    max-width: 800px; /* Reduced width */
+    margin: 0 auto; /* Center grid horizontally */
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.game-card {
+    background-color: #000000; /* Capsule background is fully black */
+    padding: 15px; /* Smaller padding */
+    text-align: center;
+    /* Removed the border entirely */
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.game-card img {
+    width: 250px; /* Smaller image width */
+    height: 250px; /* Smaller image height */
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.game-card h3 {
+    margin: 10px 0;
+    color: white; /* Text color changed to white */
+    font-size: 20px; /* Reduced font size */
+}
+
+.game-card p {
+    color: green;
+    font-size: 16px; /* Reduced price text size */
+}
+
+.store-button {
+    padding: 8px 15px; /* Smaller button padding */
+    font-size: 14px; /* Smaller button font size */
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.store-button:hover {
+    background-color: #FF4D4D;
+    transform: scale(1.1);
+}
+
+#patreon-link {
+    margin-top: auto; /* Makes it stick to the bottom */
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for the Patreon link */
+#patreon-link:hover {
+    background-color: #FF4D4D;
+    transform: scale(1.1);
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
