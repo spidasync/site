@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crosshair Games</title>
+    <title>Crosshair Games - Verify</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAAA-CosiI_P3Ipo9f"></div>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="icon">
-            <img src="crosshairgames.png" alt="Icon" width="100" height="100">
-        </div>
-        <nav class="navigation">
-            <ul>
-                <li><a href="#" id="home-link">Home</a></li>
-                <li><a href="#" id="games-link">Games</a></li>
-                <li><a href="#" id="about-link">About</a></li>
-                <li><a href="https://www.youtube.com/@crosshairgame" target="_blank" id="patreon-link">YouTube</a></li>
-            </ul>
-        </nav>             
+    <div id="verification-container">
+        <h2>Please verify you’re human</h2>
+        <form id="verification-form">
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAA-CosiI_P3Ipo9f"></div>
+            <button type="submit">Continue</button>
+        </form>
     </div>
 
-    <div class="content" id="content-area">
-        <div id="main-content">
+    <div id="main-content" style="display: none;">
+        <div class="sidebar">
+            <div class="icon">
+                <img src="crosshairgames.png" alt="Icon" width="100" height="100">
+            </div>
+            <nav class="navigation">
+                <ul>
+                    <li><a href="#" id="home-link">Home</a></li>
+                    <li><a href="#" id="games-link">Games</a></li>
+                    <li><a href="#" id="about-link">About</a></li>
+                    <li><a href="https://www.youtube.com/@crosshairgame" target="_blank" id="patreon-link">YouTube</a></li>
+                </ul>
+            </nav>             
+        </div>
+
+        <div class="content" id="content-area">
             <h1>Crosshair Games</h1>
             <h2>Simple Indie.</h2>
             <button id="show-games-btn">Show Games</button>
@@ -33,69 +40,29 @@
     </div>
 
     <script>
-        document.getElementById('home-link').addEventListener('click', function() {
-            document.getElementById('content-area').innerHTML = `
-                <div id="main-content">
-                    <h1>Crosshair Games</h1>
-                    <h2>Indie VHS Horror</h2>
-                    <button id="show-games-btn">Show Games</button>
-                </div>
-            `;
+        document.getElementById("verification-form").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-            document.getElementById('show-games-btn').addEventListener('click', function() {
-                loadGamesPage();
-            });
+            // Check if Turnstile has verified the user
+            let turnstileResponse = document.querySelector("[name='cf-turnstile-response']").value;
+
+            if (turnstileResponse) {
+                // Store verification status in sessionStorage
+                sessionStorage.setItem("verified", "true");
+
+                // Hide verification and show main content
+                document.getElementById("verification-container").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                alert("Please complete the verification.");
+            }
         });
 
-        document.getElementById('games-link').addEventListener('click', loadGamesPage);
-
-        function loadGamesPage() {
-            document.getElementById('content-area').innerHTML = `
-                <div class="games-grid">
-                    <div class="game-card" onclick="loadGamePage('hellcam', 'https://store.steampowered.com/app/3222490/HELLCAM/')">
-                        <img src="game1.png" alt="Game 1">
-                        <h3>HELLCAM</h3>
-                        <p>Free</p>
-                    </div>
-                    <div class="game-card" onclick="loadGamePage('blackwater creek', 'https://crosshairgame.itch.io/blackwater-creek')">
-                        <img src="game2.png" alt="Game 2">
-                        <h3>Blackwater Creek</h3>
-                        <p>Free</p>
-                    </div>
-                    <div class="game-card" onclick="loadGamePage('trapper', 'https://crosshairgame.itch.io/trapper')">
-                        <img src="game3.png" alt="Game 3">
-                        <h3>TRAPPER</h3>
-                        <p>Free</p>
-                    </div>
-                    <div class="game-card" onclick="loadGamePage('starforge online', 'https://www.starforgeonline.com/')">
-                        <img src="comingsoon.png" alt="Game 4">
-                        <h3>STARFORGE ONLINE</h3>
-                        <p>Free</p>
-                    </div>
-                </div>
-            `;
+        // Check if user is already verified
+        if (sessionStorage.getItem("verified") === "true") {
+            document.getElementById("verification-container").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
         }
-
-        function loadGamePage(gameName, itchLink) {
-            document.getElementById('content-area').innerHTML = `
-                <div id="game-page">
-                    <h1>${gameName.toUpperCase()}</h1>
-                    <button class="store-button" onclick="window.location.href='${itchLink}'">Go to Itch.io Page</button>
-                </div>
-            `;
-        }
-
-        document.getElementById('about-link').addEventListener('click', function() {
-            document.getElementById('content-area').innerHTML = `
-                <div id="main-content">
-                    <h1>About Us</h1>
-                    <h2>Crosshair Games is an Australian independent game studio established June 3rd, 2020 and run by a 16 year old solo developer.</h2>
-                    <p>Crosshair Games™</p>
-                </div>
-            `;
-        });
-
-        document.getElementById('show-games-btn').addEventListener('click', loadGamesPage);
     </script>
 </body>
 </html>
